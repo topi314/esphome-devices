@@ -1,0 +1,30 @@
+esphome:
+  project:
+    name: topi314.LED
+    version: 2025.4.0
+  name: led
+  friendly_name: LED
+  name_add_mac_suffix: true
+  min_version: 2025.3.3
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  level: debug
+  logs:
+    sensor: WARN # avoids logging debug sensor updates
+
+light:
+  - platform: fastled_spi
+    chipset: WS2801
+    data_pin: GPIO22
+    clock_pin: GPIO21
+    num_leds: 135
+    rgb_order: RGB
+    name: "Light"
+    effects:
+      - random:
+          name: Random

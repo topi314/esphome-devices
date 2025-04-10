@@ -1,0 +1,46 @@
+esphome:
+  project:
+    name: topi314.Weather
+    version: 2025.4.0
+  name: weather
+  friendly_name: Weather
+  name_add_mac_suffix: true
+  min_version: 2025.3.3
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  level: debug
+  logs:
+    sensor: WARN # avoids logging debug sensor updates
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+
+one_wire:
+  - platform: gpio
+    pin: GPIO4
+
+sensor:
+  - platform: bme280_i2c
+    temperature:
+      name: "Temperature"
+    pressure:
+      name: "Pressure"
+    humidity:
+      name: "Humidity"
+    address: 0x76
+    update_interval: 15s
+  - platform: dallas_temp
+    address: ${temperature_sensor_1}
+    name: "Temperature 1"
+    update_interval: 15s
+  - platform: dallas_temp
+    address: ${temperature_sensor_2}
+    name: "Temperature 2"
+    update_interval: 15s

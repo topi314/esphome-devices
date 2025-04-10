@@ -1,0 +1,14 @@
+packages:
+  air: !include
+    file: common/air-base.yaml
+
+esphome:
+  name: air
+  friendly_name: Air
+  name_add_mac_suffix: false
+
+wifi:
+  ap:
+    ssid: "Air"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password

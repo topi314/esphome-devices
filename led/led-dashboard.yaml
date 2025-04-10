@@ -1,0 +1,14 @@
+packages:
+  led: !include
+    file: common/led-base.yaml
+
+esphome:
+  name: led
+  friendly_name: LED
+  name_add_mac_suffix: false
+
+wifi:
+  ap:
+    ssid: "LED"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password

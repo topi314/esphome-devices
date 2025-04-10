@@ -1,0 +1,17 @@
+packages:
+  weather: !include
+    file: common/weather-base.yaml
+    vars:
+      temperature_sensor_1: 0x123456789
+      temperature_sensor_2: 0x123456789
+
+esphome:
+  name: weather
+  friendly_name: Weather
+  name_add_mac_suffix: false
+
+wifi:
+  ap:
+    ssid: "Weather"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password

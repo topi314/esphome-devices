@@ -1,0 +1,17 @@
+packages:
+  fridge: !include
+    file: common/fridge-base.yaml
+    vars:
+      temperature_1: 0x123456789
+      temperature_2: 0x123456789
+
+esphome:
+  name: fridge
+  friendly_name: Fridge
+  name_add_mac_suffix: false
+
+wifi:
+  ap:
+    ssid: "Fridge"
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password

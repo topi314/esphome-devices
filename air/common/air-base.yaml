@@ -1,0 +1,55 @@
+esphome:
+  project:
+    name: topi314.Air
+    version: 2025.4.0
+  name: air
+  friendly_name: Air
+  name_add_mac_suffix: true
+  min_version: 2025.3.3
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  level: debug
+  logs:
+    sensor: WARN # avoids logging debug sensor updates
+
+api:
+  actions:
+    - action: calibrate_co2_value
+      variables:
+        co2_ppm: int
+      then:
+        - scd4x.perform_forced_calibration:
+            value: !lambda "return co2_ppm;"
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+
+sensor:
+  - platform: scd4x
+    automatic_self_calibration: false
+    co2:
+      name: "CO2"
+    temperature:
+      name: "Sensor Temperature"
+    humidity:
+      name: "Sensor Relative Humidity"
+    update_interval: 15s
+  - platform: bme280_i2c
+    address: 0x76
+    temperature:
+      name: "Temperature"
+      oversampling: 4x
+    pressure:
+      name: "Pressure"
+      oversampling: 4x
+    humidity:
+      name: "Relative Humidity"
+      oversampling: 4x
+    update_interval: 15s
